@@ -1,0 +1,56 @@
+
+x-svc: &service
+  env_file:
+    - "/app/search.marginalia.nu/env/service.env"
+  volumes:
+    - ms_conf:/wmsa/conf:ro
+    - ms_model:/wmsa/model:ro
+    - ms_data:/wmsa/data:ro
+    - ms_logs:/var/log/wmsa
+    - "/app/index/2/current:/idx"
+    - "/app/index/2/work:/work"
+    - "/app/index/2/backup:/backup"
+    - "/app/index/2/storage:/storage"
+  restart: unless-stopped
+  networks:
+    - wmsa
+  environment:
+    - "WMSA_SERVICE_NODE=2"
+
+
+services:
+  index-service-2:
+    <<: *service
+    image: "marginalia.nu/index-service"
+    container_name: "index-service-2"
+  executor-service-2:
+    <<: *service
+    image: "marginalia.nu/executor-service"
+    container_name: "executor-service-2"
+networks:
+  wmsa:
+volumes:
+  ms_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/logs
+  ms_model:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/model
+  ms_conf:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/conf
+  ms_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/data

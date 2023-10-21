@@ -1,0 +1,23 @@
+services:
+  mariadb:
+    image: "mariadb:lts"
+    container_name: "mariadb"
+    env_file: "/app/wmsa_db/mariadb.env"
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - "127.0.0.1:3306:3306/tcp"
+    volumes:
+      - "/app/wmsa_db:/var/lib/mysql"
+ #      - "./code/common/db/src/main/resources/sql/current/:/docker-entrypoint-initdb.d/"
+    networks:
+      - wmsa
+    restart: unless-stopped
+networks:
+  wmsa:
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: run/db

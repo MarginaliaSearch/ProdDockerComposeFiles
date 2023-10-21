@@ -1,0 +1,80 @@
+x-svc: &service
+  env_file:
+    - "/app/search.marginalia.nu/env/service.env"
+  volumes:
+    - ms_conf:/wmsa/conf:ro
+    - ms_model:/wmsa/model:ro
+    - ms_data:/wmsa/data:ro
+    - ms_logs:/var/log/wmsa
+  networks:
+    - wmsa
+  restart: unless-stopped
+services:
+  search-service:
+    <<: *service
+    image: "marginalia.nu/search-service"
+    container_name: "search-service"
+  assistant-service:
+    <<: *service
+    image: "marginalia.nu/assistant-service"
+    container_name: "assistant-service"
+  api-service:
+    <<: *service
+    image: "marginalia.nu/api-service"
+    container_name: "api-service"
+  query-service:
+    <<: *service
+    image: "marginalia.nu/query-service"
+    container_name: "query-service"
+  dating-service:
+    <<: *service
+    image: "marginalia.nu/dating-service"
+    container_name: "dating-service"
+  explorer-service:
+    <<: *service
+    image: "marginalia.nu/explorer-service"
+    container_name: "explorer-service"
+  control-service:
+    <<: *service
+    image: "marginalia.nu/control-service"
+    container_name: "control-service"
+  nginx-gw:
+    image: "nginx"
+    container_name: "nginx-gw"
+    ports:
+      - "127.0.0.1:8080:80"
+      - "127.0.0.1:8081:81"
+      - "127.0.0.1:8082:82"
+    volumes:
+      - "/app/search.marginalia.nu/nginx-site.conf:/etc/nginx/conf.d/default.conf"
+    networks:
+      - wmsa
+    depends_on:
+      - search-service
+networks:
+  wmsa:
+volumes:
+  ms_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/logs
+  ms_model:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/model
+  ms_conf:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/conf
+  ms_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /app/search.marginalia.nu/data
