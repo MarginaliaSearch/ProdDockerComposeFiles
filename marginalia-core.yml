@@ -55,7 +55,7 @@ services:
     - "traefik.http.routers.api-service.middlewares=add-xpublic"
     - "traefik.http.routers.api-service.middlewares=add-public"
     - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-    - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
+    - "traefik.http.middlewares.add-public.addprefix.prefix=/public/api"
   dating-service:
     <<: *service
     image: "marginalia.nu/dating-service"
