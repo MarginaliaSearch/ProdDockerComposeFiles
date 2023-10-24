@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 docker-compose -f wmsa_db.yml up -d
 docker-compose -f trafeik.yml up -d
 docker-compose -f marginalia-core.yml up -d
