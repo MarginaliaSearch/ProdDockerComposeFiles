@@ -12,3 +12,4 @@ docker-compose -f marginalia-node-5.yml up -d
 docker-compose -f marginalia-node-6.yml up -d
 docker-compose -f marginalia-node-7.yml up -d
 docker-compose -f marginalia-node-8.yml up -d
+docker-compose -f marginalia-node-9.yml up -d
