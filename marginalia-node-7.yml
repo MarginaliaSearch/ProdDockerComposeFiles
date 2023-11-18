@@ -21,11 +21,11 @@ x-svc: &service
 services:
   index-service-7:
     <<: *service
-    image: "marginalia.nu/index-service"
+    image: "marginalia/index-service"
     container_name: "index-service-7"
   executor-service-7:
     <<: *service
-    image: "marginalia.nu/executor-service"
+    image: "marginalia/executor-service"
     container_name: "executor-service-7"
 networks:
   wmsa:

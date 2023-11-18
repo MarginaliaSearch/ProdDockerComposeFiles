@@ -12,11 +12,11 @@ x-svc: &service
 services:
   query-service:
     <<: *service
-    image: "marginalia.nu/query-service"
+    image: "marginalia/query-service"
     container_name: "query-service"
   search-service:
     <<: *service
-    image: "marginalia.nu/search-service"
+    image: "marginalia/search-service"
     container_name: "search-service"
     expose:
     - 80
@@ -30,7 +30,7 @@ services:
     - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   assistant-service:
     <<: *service
-    image: "marginalia.nu/assistant-service"
+    image: "marginalia/assistant-service"
     container_name: "assistant-service"
     expose:
       - 80
@@ -48,7 +48,7 @@ services:
       - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   api-service:
     <<: *service
-    image: "marginalia.nu/api-service"
+    image: "marginalia/api-service"
     container_name: "api-service"
     expose:
     - "80"
@@ -62,7 +62,7 @@ services:
     - "traefik.http.middlewares.add-public-api.addprefix.prefix=/public/api"
   dating-service:
     <<: *service
-    image: "marginalia.nu/dating-service"
+    image: "marginalia/dating-service"
     container_name: "dating-service"
     expose:
       - 80
@@ -76,7 +76,7 @@ services:
       - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   explorer-service:
     <<: *service
-    image: "marginalia.nu/explorer-service"
+    image: "marginalia/explorer-service"
     container_name: "explorer-service"
     expose:
     - 80
@@ -90,7 +90,7 @@ services:
     - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   control-service:
     <<: *service
-    image: "marginalia.nu/control-service"
+    image: "marginalia/control-service"
     container_name: "control-service"
     expose:
     - 80
