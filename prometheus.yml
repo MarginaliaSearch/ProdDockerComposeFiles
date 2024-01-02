@@ -1,0 +1,17 @@
+services:
+  prometheus:
+    image: "prom/prometheus"
+    container_name: "prometheus"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "127.0.0.1:8092:9090"
+    volumes:
+      - "/app/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "/app/prometheus:/prometheus"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - wmsa
+    restart: unless-stopped
+networks:
+  wmsa:

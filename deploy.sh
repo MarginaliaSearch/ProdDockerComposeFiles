@@ -3,6 +3,7 @@
 set -e
 docker-compose -f wmsa_db.yml up -d
 docker-compose -f trafeik.yml up -d
+docker-compose -f prometheus.yml up -d
 docker-compose -f marginalia-core.yml up -d
 docker-compose -f marginalia-node-1.yml up -d
 docker-compose -f marginalia-node-2.yml up -d
