@@ -11,6 +11,7 @@ x-svc: &service
     - "/app/index/9/work:/work"
     - "/app/index/9/backup:/backup"
     - "/app/index/9/storage:/storage"
+    - "/app/index/9/uploads:/uploads"
   restart: unless-stopped
   networks:
     - wmsa
