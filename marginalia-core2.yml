@@ -9,6 +9,8 @@ x-svc: &service
   networks:
     - wmsa
   restart: unless-stopped
+  environment:
+    - "WMSA_SERVICE_NODE=2"
 services:
   query-service-2:
     <<: *service
