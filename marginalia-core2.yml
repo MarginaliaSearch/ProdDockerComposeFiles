@@ -1,4 +1,3 @@
-
 x-svc: &service
   env_file:
     - "/app/search.marginalia.nu/env/service.env"
@@ -7,27 +6,26 @@ x-svc: &service
     - ms_model:/wmsa/model:ro
     - ms_data:/wmsa/data:ro
     - ms_logs:/var/log/wmsa
-    - "/app/index/8/current:/idx"
-    - "/app/index/8/work:/work"
-    - "/app/index/8/backup:/backup"
-    - "/app/index/8/storage:/storage"
-    - "/app/index/1/uploads:/uploads"
-  restart: unless-stopped
   networks:
     - wmsa
-  environment:
-    - "WMSA_SERVICE_NODE=8"
-
-
+  restart: unless-stopped
 services:
-  index-service-8:
+  query-service-2:
     <<: *service
-    image: "marginalia/index-service"
-    container_name: "index-service-8"
-  executor-service-8:
+    image: "marginalia/query-service"
+    container_name: "query-service-2"
+  search-service-2:
     <<: *service
-    image: "marginalia/executor-service"
-    container_name: "executor-service-8"
+    image: "marginalia/search-service"
+    container_name: "search-service-2"
+  assistant-service-2:
+    <<: *service
+    image: "marginalia/assistant-service"
+    container_name: "assistant-service-2"
+  api-service-2:
+    <<: *service
+    image: "marginalia/api-service"
+    container_name: "api-service-2"
 networks:
   wmsa:
     external: true

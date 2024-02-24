@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v2.10"
+    image: "traefik"
     container_name: "traefik"
     command:
       - "--api.insecure=true"
@@ -20,11 +20,13 @@ services:
       - "127.0.0.1:8090:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/app/trafeik:/traefik-conf:ro"
     networks:
       - wmsa
     restart: unless-stopped
 networks:
   wmsa:
+    external: true
 volumes:
   db:
     driver: local

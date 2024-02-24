@@ -10,100 +10,37 @@ x-svc: &service
     - wmsa
   restart: unless-stopped
 services:
-  query-service:
+  query-service-1:
     <<: *service
     image: "marginalia/query-service"
-    container_name: "query-service"
-  search-service:
+    container_name: "query-service-1"
+  search-service-1:
     <<: *service
     image: "marginalia/search-service"
-    container_name: "search-service"
-    expose:
-    - 80
-    labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.search-service.rule=PathPrefix(`/`)"
-    - "traefik.http.routers.search-service.entrypoints=search"
-    - "traefik.http.routers.search-service.middlewares=add-xpublic"
-    - "traefik.http.routers.search-service.middlewares=add-public"
-    - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-    - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
-  assistant-service:
+    container_name: "search-service-1"
+  assistant-service-1:
     <<: *service
     image: "marginalia/assistant-service"
-    container_name: "assistant-service"
-    expose:
-      - 80
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.assistant-service-screenshot.rule=PathPrefix(`/screenshot`)"
-      - "traefik.http.routers.assistant-service-screenshot.entrypoints=search,dating"
-      - "traefik.http.routers.assistant-service-screenshot.middlewares=add-xpublic"
-      - "traefik.http.routers.assistant-service-screenshot.middlewares=add-public"
-      - "traefik.http.routers.assistant-service-suggest.rule=PathPrefix(`/suggest`)"
-      - "traefik.http.routers.assistant-service-suggest.entrypoints=search"
-      - "traefik.http.routers.assistant-service-suggest.middlewares=add-xpublic"
-      - "traefik.http.routers.assistant-service-suggest.middlewares=add-public"
-      - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-      - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
-  api-service:
+    container_name: "assistant-service-1"
+  api-service-1:
     <<: *service
     image: "marginalia/api-service"
-    container_name: "api-service"
-    expose:
-    - "80"
-    labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.api-service.rule=PathPrefix(`/`)"
-    - "traefik.http.routers.api-service.entrypoints=api"
-    - "traefik.http.routers.api-service.middlewares=add-xpublic"
-    - "traefik.http.routers.api-service.middlewares=add-public-api"
-    - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-    - "traefik.http.middlewares.add-public-api.addprefix.prefix=/public/api"
+    container_name: "api-service-1"
   dating-service:
     <<: *service
     image: "marginalia/dating-service"
     container_name: "dating-service"
-    expose:
-      - 80
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dating-service.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.dating-service.entrypoints=dating"
-      - "traefik.http.routers.dating-service.middlewares=add-xpublic"
-      - "traefik.http.routers.dating-service.middlewares=add-public"
-      - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-      - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   explorer-service:
     <<: *service
     image: "marginalia/explorer-service"
     container_name: "explorer-service"
-    expose:
-    - 80
-    labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.explorer-service.rule=PathPrefix(`/`)"
-    - "traefik.http.routers.explorer-service.entrypoints=explore"
-    - "traefik.http.routers.explorer-service.middlewares=add-xpublic"
-    - "traefik.http.routers.explorer-service.middlewares=add-public"
-    - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-    - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
   control-service:
     <<: *service
     image: "marginalia/control-service"
     container_name: "control-service"
-    expose:
-    - 80
-    labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.control-service.rule=PathPrefix(`/`)"
-    - "traefik.http.routers.control-service.entrypoints=control"
-    - "traefik.http.routers.control-service.middlewares=add-xpublic"
-    - "traefik.http.routers.control-service.middlewares=add-public"
-    - "traefik.http.middlewares.add-xpublic.headers.customrequestheaders.X-Public=1"
-    - "traefik.http.middlewares.add-public.addprefix.prefix=/public"
 networks:
   wmsa:
+    external: true
 volumes:
   ms_logs:
     driver: local
