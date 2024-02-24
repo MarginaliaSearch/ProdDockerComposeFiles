@@ -26,7 +26,6 @@ services:
     restart: unless-stopped
 networks:
   wmsa:
-    external: true
 volumes:
   db:
     driver: local

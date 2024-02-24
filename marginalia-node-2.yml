@@ -30,7 +30,6 @@ services:
     container_name: "executor-service-2"
 networks:
   wmsa:
-    external: true
 volumes:
   ms_logs:
     driver: local

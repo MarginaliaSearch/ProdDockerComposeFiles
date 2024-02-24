@@ -40,7 +40,6 @@ services:
     container_name: "control-service"
 networks:
   wmsa:
-    external: true
 volumes:
   ms_logs:
     driver: local

@@ -39,4 +39,3 @@ services:
       - wmsa
 networks:
   wmsa:
-    external: true

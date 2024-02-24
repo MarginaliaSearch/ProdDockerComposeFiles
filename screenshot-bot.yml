@@ -31,7 +31,6 @@ services:
 networks:
   headlesschrome:
   wmsa:
-    external: true
 
 volumes:
   ms_logs:

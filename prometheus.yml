@@ -15,4 +15,3 @@ services:
     restart: unless-stopped
 networks:
   wmsa:
-    external: true
