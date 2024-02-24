@@ -4,7 +4,7 @@ services:
     container_name: "traefik"
     command:
       - "--api.insecure=true"
-      - "--providers.file.filename=/app/traefik/traefik-dynamic.yml"
+      - "--providers.file.filename=/traefik-conf/traefik-dynamic.yml"
       - "--entrypoints.search.address=:80"
       - "--entrypoints.control.address=:81"
       - "--entrypoints.api.address=:82"
