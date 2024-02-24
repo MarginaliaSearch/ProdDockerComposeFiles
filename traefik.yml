@@ -25,10 +25,3 @@ services:
     restart: unless-stopped
 networks:
   wmsa:
-volumes:
-  db:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: run/db
