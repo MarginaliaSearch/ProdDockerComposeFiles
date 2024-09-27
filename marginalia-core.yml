@@ -45,6 +45,7 @@ services:
     container_name: "control-service"
 networks:
   wmsa:
+  headlesschrome:
 volumes:
   ms_logs:
     driver: local
