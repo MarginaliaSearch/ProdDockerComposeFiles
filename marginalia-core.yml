@@ -24,6 +24,9 @@ services:
     <<: *service
     image: "marginalia/assistant-service"
     container_name: "assistant-service-1"
+    networks:
+      - wmsa
+      - headlesschrome
   api-service-1:
     <<: *service
     image: "marginalia/api-service"
