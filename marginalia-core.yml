@@ -4,7 +4,7 @@ x-svc: &service
   volumes:
     - ms_conf:/wmsa/conf:ro
     - ms_model:/wmsa/model:ro
-    - ms_data:/wmsa/data:ro
+    - ms_data:/wmsa/data
     - ms_logs:/var/log/wmsa
   networks:
     - wmsa
@@ -43,6 +43,10 @@ services:
     <<: *service
     image: "marginalia/control-service"
     container_name: "control-service"
+  status-service:
+    <<: *service
+    image: "marginalia/status-service"
+    container_name: "status-service"
 networks:
   wmsa:
   headlesschrome:

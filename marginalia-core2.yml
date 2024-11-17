@@ -4,7 +4,7 @@ x-svc: &service
   volumes:
     - ms_conf:/wmsa/conf:ro
     - ms_model:/wmsa/model:ro
-    - ms_data:/wmsa/data:ro
+    - ms_data:/wmsa/data
     - ms_logs:/var/log/wmsa
   networks:
     - wmsa
