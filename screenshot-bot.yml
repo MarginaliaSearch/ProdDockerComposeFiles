@@ -1,27 +1,6 @@
-x-svc: &service
-  env_file:
-    - "/app/search.marginalia.nu/env/service.env"
-  volumes:
-    - ms_conf:/wmsa/conf:ro
-    - ms_model:/wmsa/model:ro
-    - ms_data:/wmsa/data:ro
-    - ms_logs:/var/log/wmsa
-  networks:
-    - wmsa
-  restart: unless-stopped
 services:
-  screenshot-capture-tool:
-    <<: *service
-    image: "marginalia/screenshot-capture-tool"
-    container_name: "screenshot-capture-tool"
-    networks:
-    - headlesschrome
-    - wmsa
-    depends_on:
-    - browserless
   browserless:
-    <<: *service
-    image: "browserless/chrome"
+    image: "ghcr.io/browserless/chromium"
     container_name: "headlesschrome"
     env_file:
     - "/app/search.marginalia.nu/env/browserless.env"
@@ -30,30 +9,3 @@ services:
 
 networks:
   headlesschrome:
-  wmsa:
-
-volumes:
-  ms_logs:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /app/search.marginalia.nu/logs
-  ms_model:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /app/search.marginalia.nu/model
-  ms_conf:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /app/search.marginalia.nu/conf
-  ms_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /app/search.marginalia.nu/data
